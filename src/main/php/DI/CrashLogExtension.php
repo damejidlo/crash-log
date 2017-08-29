@@ -25,7 +25,7 @@ class CrashLogExtension extends CompilerExtension
 			],
 		],
 		'filesystemService' => NULL,
-		'delegateLoggerService' => NULL,
+		'loggerServiceDelegate' => NULL,
 		'hookToTracy' => TRUE,
 	];
 
@@ -39,8 +39,8 @@ class CrashLogExtension extends CompilerExtension
 		$config = Helpers::merge($this->getConfig(), $this->defaults);
 		$builder = $this->getContainerBuilder();
 
-		if ($config['delegateLoggerService'] === NULL) {
-			$message = sprintf('Set %s to a Tracy\\ILogger service', $this->prefix('delegateLoggerService'));
+		if ($config['loggerServiceDelegate'] === NULL) {
+			$message = sprintf('Set %s to a Tracy\\ILogger service', $this->prefix('loggerServiceDelegate'));
 			throw new \LogicException($message);
 		};
 		if ($config['filesystemService'] === NULL) {
@@ -51,7 +51,7 @@ class CrashLogExtension extends CompilerExtension
 		$builder->addDefinition($this->prefix('logger'))
 			->setClass($config['logger'])
 			->setArguments([
-				'@' . ltrim($config['delegateLoggerService'], '@'),
+				'@' . ltrim($config['loggerServiceDelegate'], '@'),
 				$this->prepareExceptionPathService($config, $builder),
 				'@' . ltrim($config['filesystemService'], '@'),
 			])
