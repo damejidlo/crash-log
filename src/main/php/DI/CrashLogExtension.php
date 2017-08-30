@@ -6,7 +6,6 @@ namespace Damejidlo\CrashLog\DI;
 use Damejidlo\CrashLog\DefaultPathProvider;
 use Damejidlo\CrashLog\FlysystemAdapter;
 use Nette\DI\CompilerExtension;
-use Nette\DI\Config\Helpers;
 use Nette\DI\ContainerBuilder;
 use Nette\PhpGenerator\ClassType;
 
@@ -15,6 +14,9 @@ use Nette\PhpGenerator\ClassType;
 class CrashLogExtension extends CompilerExtension
 {
 
+	/**
+	 * @var array
+	 */
 	private $defaults = [
 		'logger' => FlysystemAdapter::class,
 		'logPathProvider' => [
@@ -36,7 +38,7 @@ class CrashLogExtension extends CompilerExtension
 	 */
 	public function loadConfiguration()
 	{
-		$config = Helpers::merge($this->getConfig(), $this->defaults);
+		$config = $this->validateConfig($this->defaults);
 		$builder = $this->getContainerBuilder();
 
 		if ($config['loggerServiceDelegate'] === NULL) {
@@ -65,7 +67,7 @@ class CrashLogExtension extends CompilerExtension
 	 */
 	public function afterCompile(ClassType $class)
 	{
-		$config = Helpers::merge($this->getConfig(), $this->defaults);
+		$config = $this->getConfig();
 		if ($config['hookToTracy'] === TRUE) {
 			$initialize = $class->getMethod('initialize');
 

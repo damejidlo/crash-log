@@ -6,8 +6,8 @@ Adapter for [Tracy](https://tracy.nette.org/en/) and
 All HTML dumps with uncaught exceptions or PHP errors that Tracy generates
 are stored to any backend storage Flysystem supports. 
 
-CrashLog requires a properly configured `FilesystemInterface` to operate 
-properly. All log messages that do not implement `\Throwable` are relayed
+CrashLog requires a properly configured `FilesystemInterface` to operate.
+All log messages that do not implement `\Throwable` are relayed
 to the specified `ILogger` delegate. 
 
 Installation

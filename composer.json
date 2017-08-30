@@ -9,6 +9,7 @@
 		"nette/utils": "^2.4"
 	},
 	"require-dev": {
+		"hamcrest/hamcrest-php": "^1.2.2",
 		"nette/tester": "^2.0",
 		"mockery/mockery": "^0.9.9",
 		"nette/di": "^2.4",

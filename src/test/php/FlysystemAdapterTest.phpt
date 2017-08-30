@@ -39,7 +39,6 @@ class FlysystemAdapterTest extends TestCase
 
 	public function testFallbackLogging()
 	{
-
 		$loggingException = new \LogicException();
 		$logMessage = new \RuntimeException();
 

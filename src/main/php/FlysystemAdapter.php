@@ -55,7 +55,7 @@ class FlysystemAdapter implements ILogger
 	 */
 	public function log($value, $priority = self::INFO)
 	{
-		if ($value instanceof \Exception || $value instanceof \Throwable) {
+		if ($value instanceof \Throwable) {
 			try {
 				ob_start();
 				(new BlueScreen())->render($value);
