@@ -1,0 +1,13 @@
+language: php
+
+php:
+  - "7.0"
+
+before_script:
+  - composer self-update || echo "[ERROR] update-composer failed!"
+  - composer install --no-interaction --optimize-autoloader
+
+script:
+  - vendor/bin/tester -s -j 4 ./src/test/php
+  - vendor/bin/phpcs --runtime-set installed_paths vendor/damejidlo/coding-standard --standard=DameJidloCodingStandard --extensions=php,phpt --encoding=utf-8  src/main/php/ src/test/php/
+  - vendor/bin/phpstan analyze -l 4 src/main/php/
