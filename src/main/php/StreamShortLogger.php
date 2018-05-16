@@ -48,7 +48,7 @@ class StreamShortLogger implements ILogger
 	 * @param  string|\Throwable
 	 * @return string
 	 */
-	protected function formatLogLine($message)
+	private function formatLogLine($message) : string
 	{
 		if ($message instanceof \Throwable) {
 			$dumpedMessage = $message->getMessage();

@@ -15,7 +15,7 @@ class CrashLogExtension extends CompilerExtension
 {
 
 	/**
-	 * @var array
+	 * @var mixed[]
 	 */
 	private $defaults = [
 		'logger' => FlysystemAdapter::class,
@@ -37,7 +37,7 @@ class CrashLogExtension extends CompilerExtension
 	/**
 	 * @inheritDoc
 	 */
-	public function loadConfiguration()
+	public function loadConfiguration() : void
 	{
 		$config = $this->validateConfig($this->defaults);
 		$builder = $this->getContainerBuilder();
@@ -66,7 +66,7 @@ class CrashLogExtension extends CompilerExtension
 	/**
 	 * @inheritdoc
 	 */
-	public function afterCompile(ClassType $class)
+	public function afterCompile(ClassType $class) : void
 	{
 		$config = $this->getConfig();
 		if ($config['hookToTracy'] === TRUE) {
@@ -86,7 +86,7 @@ class CrashLogExtension extends CompilerExtension
 
 
 	/**
-	 * @param array $config
+	 * @param mixed[] $config
 	 * @param ContainerBuilder $builder
 	 * @return string
 	 */
