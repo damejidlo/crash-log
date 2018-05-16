@@ -29,6 +29,7 @@ class CrashLogExtension extends CompilerExtension
 		'filesystemService' => NULL,
 		'loggerServiceDelegate' => NULL,
 		'hookToTracy' => TRUE,
+		'hookedServiceOverride' => NULL,
 	];
 
 
@@ -71,8 +72,14 @@ class CrashLogExtension extends CompilerExtension
 		if ($config['hookToTracy'] === TRUE) {
 			$initialize = $class->getMethod('initialize');
 
+			if ($config['hookedServiceOverride'] === NULL) {
+				$exposedService = $this->prefix('logger');
+			} else {
+				$exposedService = ltrim($config['hookedServiceOverride'], '@');
+			}
+
 			$code = '\Tracy\Debugger::setLogger($this->getService(?));';
-			$initialize->addBody($code, [$this->prefix('logger')]);
+			$initialize->addBody($code, [$exposedService]);
 		}
 	}
 
