@@ -15,7 +15,7 @@ use Tester\TestCase;
 class LogPathProviderTest extends TestCase
 {
 
-	public function testGetExceptionFile()
+	public function testGetExceptionFile() : void
 	{
 		$exception = new \RuntimeException();
 

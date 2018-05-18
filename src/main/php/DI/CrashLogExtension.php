@@ -15,7 +15,7 @@ class CrashLogExtension extends CompilerExtension
 {
 
 	/**
-	 * @var array
+	 * @var mixed[]
 	 */
 	private $defaults = [
 		'logger' => FlysystemAdapter::class,
@@ -29,6 +29,7 @@ class CrashLogExtension extends CompilerExtension
 		'filesystemService' => NULL,
 		'loggerServiceDelegate' => NULL,
 		'hookToTracy' => TRUE,
+		'hookedServiceOverride' => NULL,
 	];
 
 
@@ -36,7 +37,7 @@ class CrashLogExtension extends CompilerExtension
 	/**
 	 * @inheritDoc
 	 */
-	public function loadConfiguration()
+	public function loadConfiguration() : void
 	{
 		$config = $this->validateConfig($this->defaults);
 		$builder = $this->getContainerBuilder();
@@ -65,21 +66,27 @@ class CrashLogExtension extends CompilerExtension
 	/**
 	 * @inheritdoc
 	 */
-	public function afterCompile(ClassType $class)
+	public function afterCompile(ClassType $class) : void
 	{
 		$config = $this->getConfig();
 		if ($config['hookToTracy'] === TRUE) {
 			$initialize = $class->getMethod('initialize');
 
+			if ($config['hookedServiceOverride'] === NULL) {
+				$exposedService = $this->prefix('logger');
+			} else {
+				$exposedService = ltrim($config['hookedServiceOverride'], '@');
+			}
+
 			$code = '\Tracy\Debugger::setLogger($this->getService(?));';
-			$initialize->addBody($code, [$this->prefix('logger')]);
+			$initialize->addBody($code, [$exposedService]);
 		}
 	}
 
 
 
 	/**
-	 * @param array $config
+	 * @param mixed[] $config
 	 * @param ContainerBuilder $builder
 	 * @return string
 	 */

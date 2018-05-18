@@ -19,7 +19,7 @@ use Tracy\ILogger;
 class FlysystemAdapterTest extends TestCase
 {
 
-	public function testNonException()
+	public function testNonException() : void
 	{
 		$delegate = Mockery::mock(ILogger::class);
 		$delegate->shouldReceive('log')->with('foo', Mockery::any())->once();
@@ -37,7 +37,7 @@ class FlysystemAdapterTest extends TestCase
 
 
 
-	public function testFallbackLogging()
+	public function testFallbackLogging() : void
 	{
 		$loggingException = new \LogicException();
 		$logMessage = new \RuntimeException();
@@ -66,7 +66,7 @@ class FlysystemAdapterTest extends TestCase
 	 * @dataProvider happyPathExceptionProvider
 	 * @param \Throwable|NULL $exception
 	 */
-	public function testHappyPath(\Throwable $exception = NULL)
+	public function testHappyPath(\Throwable $exception = NULL) : void
 	{
 		$exceptionFilePath = '/bar/exception-123.html';
 
@@ -96,7 +96,7 @@ class FlysystemAdapterTest extends TestCase
 
 
 	/**
-	 * @return array
+	 * @return mixed[][]
 	 */
 	protected function happyPathExceptionProvider() : array
 	{
@@ -108,7 +108,7 @@ class FlysystemAdapterTest extends TestCase
 
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		Mockery::close();
 	}
