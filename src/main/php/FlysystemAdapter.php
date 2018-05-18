@@ -53,7 +53,7 @@ class FlysystemAdapter implements ILogger
 	/**
 	 * @inheritdoc
 	 */
-	public function log($value, $priority = self::INFO)
+	public function log($value, $priority = self::INFO) : void
 	{
 		if ($value instanceof \Throwable) {
 			try {

@@ -31,7 +31,6 @@ extensions:
 crashLog:
 	filesystemService: <service-name>
 	delegateLoggerService: <service-name>
-
 ```
 
 Contributing
