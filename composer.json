@@ -6,7 +6,8 @@
 		"php": ">=7.0",
 		"tracy/tracy": "^2.4",
 		"league/flysystem": "^1.0",
-		"nette/utils": "^2.4"
+		"nette/utils": "^2.4",
+		"monolog/monolog": "^1.23"
 	},
 	"require-dev": {
 		"hamcrest/hamcrest-php": "^1.2.2",

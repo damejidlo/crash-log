@@ -3,40 +3,23 @@ declare(strict_types = 1);
 
 namespace Damejidlo\CrashLog;
 
+use Monolog\Handler\StreamHandler;
 use Tracy\Dumper;
 use Tracy\Helpers;
-use Tracy\ILogger;
 
 
 
-class StreamShortLogger implements ILogger
+class StreamShortHandler extends StreamHandler
 {
 
-	/**
-	 * @var ILogger
-	 */
-	private $delegate;
-
-	/**
-	 * @var string
-	 */
-	private $destination;
-
-
-
-	public function __construct(ILogger $delegate, string $destination)
+	protected function streamWrite($stream, array $record)
 	{
-		$this->delegate = $delegate;
-		$this->destination = $destination;
-	}
+		// log only exceptions
+		if (isset($record['context']['exception'])) {
+			$record['formatted'] = $this->formatLogLine($record['context']['exception']);
 
-
-
-	public function log($value, $priority = self::INFO) : void
-	{
-		$logLine = $this->formatLogLine($value) . PHP_EOL;
-		file_put_contents($this->destination, $logLine, FILE_APPEND);
-		$this->delegate->log($value, $priority);
+			parent::streamWrite($stream, $record);
+		}
 	}
 
 
