@@ -8,6 +8,7 @@ before_script:
   - composer install --no-interaction --optimize-autoloader
 
 script:
+  - vendor/bin/parallel-lint src/test/ src/main/
   - vendor/bin/tester -s -j 4 ./src/test/php
   - vendor/bin/phpcs --runtime-set installed_paths vendor/damejidlo/coding-standard --standard=DameJidloCodingStandard --extensions=php,phpt --encoding=utf-8  src/main/php/ src/test/php/
   - vendor/bin/phpstan analyze -l 4 src/main/php/
