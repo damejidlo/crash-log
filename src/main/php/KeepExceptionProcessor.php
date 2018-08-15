@@ -3,14 +3,12 @@ declare(strict_types = 1);
 
 namespace Damejidlo\CrashLog;
 
-
-
 class KeepExceptionProcessor
 {
 
 	/**
 	 * @param mixed[] $record
-	 * @return array
+	 * @return mixed[]
 	 */
 	public function __invoke(array $record) : array
 	{

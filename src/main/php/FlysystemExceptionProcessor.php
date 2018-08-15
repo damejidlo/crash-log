@@ -43,10 +43,10 @@ class FlysystemExceptionProcessor
 	 * Adapted from \Kdyby\Monolog\Diagnostics\MonologAdapter, authored by Martin Bažík <martin@bazo.sk> and Filip Procházka <filip@prochazka.su>
 	 * All rights reserved. New BSD License - see kdyby-monolog-license.md
 	 *
-	 * @param array $record
-	 * @return array
+	 * @param mixed[] $record
+	 * @return mixed[]
 	 */
-	public function __invoke(array $record)
+	public function __invoke(array $record) : array
 	{
 		if (isset($record['context']['tracy'])) {
 			// already processed by MonologAdapter

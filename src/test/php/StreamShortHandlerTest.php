@@ -19,7 +19,7 @@ class StreamShortHandlerTest extends TestCase
 	 * @param mixed[] $record
 	 * @param string $expectation
 	 */
-	public function testHandle(array $record, string $expectation)
+	public function testHandle(array $record, string $expectation) : void
 	{
 		$logFile = FileMock::create();
 
@@ -32,6 +32,9 @@ class StreamShortHandlerTest extends TestCase
 
 
 
+	/**
+	 * @return mixed[]
+	 */
 	protected function provideRecord() : array
 	{
 		return [

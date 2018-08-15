@@ -12,6 +12,10 @@ use Tracy\Helpers;
 class StreamShortHandler extends StreamHandler
 {
 
+	/**
+	 * @param resource $stream
+	 * @param mixed[] $record
+	 */
 	protected function streamWrite($stream, array $record)
 	{
 		$message = $record['extra']['exception'] ?? $record['message'];

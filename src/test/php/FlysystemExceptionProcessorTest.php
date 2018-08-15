@@ -24,7 +24,7 @@ class FlysystemExceptionProcessorTest extends TestCase
 	 * @param bool $isWritten
 	 * @param string|NULL $tracyPath
 	 */
-	public function testHandle(array $record, bool $isWritten, ?string $tracyPath)
+	public function testHandle(array $record, bool $isWritten, ?string $tracyPath) : void
 	{
 		$filesystem = Mockery::mock(FilesystemInterface::class);
 		$pathProvider = Mockery::mock(IExceptionPathProvider::class);
@@ -46,6 +46,9 @@ class FlysystemExceptionProcessorTest extends TestCase
 
 
 
+	/**
+	 * @return mixed[]
+	 */
 	protected function provideRecord() : array
 	{
 		$default = [
