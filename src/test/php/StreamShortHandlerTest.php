@@ -40,17 +40,18 @@ class StreamShortHandlerTest extends TestCase
 					'message' => 'It is broken',
 					'level' => \Monolog\Logger::CRITICAL,
 					'extra' => [],
+					'context' => [],
 				],
-				'expectation' => '',
+				'expectation' => '%a%It is broken%a%/StreamShortHandlerTest.php',
 			],
 			[
 				'record' => [
-					'message' => 'Máš to rozbitý',
-					'context' => ['exception' => new \Exception('Bla bla failed')],
+					'message' => 'Foo bar',
 					'level' => \Monolog\Logger::CRITICAL,
-					'extra' => [],
+					'extra' => ['exception' => new \Exception('Bla bla failed')],
+					'context' => [],
 				],
-				'expectation' => '%a% Bla bla failed  @  CLI (PID: %a%): %a%/src/test/php/StreamShortHandlerTest.php',
+				'expectation' => '%a% Bla bla failed%a%/StreamShortHandlerTest.php',
 			],
 		];
 	}

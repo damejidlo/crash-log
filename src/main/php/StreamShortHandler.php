@@ -14,12 +14,10 @@ class StreamShortHandler extends StreamHandler
 
 	protected function streamWrite($stream, array $record)
 	{
-		// log only exceptions
-		if (isset($record['context']['exception'])) {
-			$record['formatted'] = $this->formatLogLine($record['context']['exception']);
+		$message = $record['extra']['exception'] ?? $record['message'];
+		$record['formatted'] = $this->formatLogLine($message);
 
-			parent::streamWrite($stream, $record);
-		}
+		parent::streamWrite($stream, $record);
 	}
 
 
