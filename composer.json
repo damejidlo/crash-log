@@ -3,7 +3,7 @@
 	"description": "Tracy integration with Flysystem",
 	"type": "library",
 	"require": {
-		"php": ">=7.0",
+		"php": ">=7.1",
 		"tracy/tracy": "^2.4",
 		"league/flysystem": "^1.0",
 		"monolog/monolog": "^1.23"
